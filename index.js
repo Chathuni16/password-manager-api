@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import passwordRoutes from "./route/passwordRoute.js";
 
 const app=express();
 
@@ -21,3 +22,5 @@ mongoose
     });
 })
 .catch ((error)=>console.log(error));
+
+app.use("/api/passwords",passwordRoutes);

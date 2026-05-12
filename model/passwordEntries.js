@@ -7,4 +7,4 @@ const passwordSchema = new mongoose.Schema({
     category: { type: String, default: 'General' }
 });
 
-module.exports = mongoose.model('PasswordEntries', passwordSchema);
+export default mongoose.model('PasswordEntries', passwordSchema);

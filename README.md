@@ -3,7 +3,7 @@
 > **ICA – 03 | Web Services and Technology (IT2234) | Level 2 IT**
 >
 > **Student Name:** `A.A.K.C.Abeysinghe`
-> **GitHub:** [Chathuni16](https://github.com/Chathuni16/password-manager-api)
+> **GitHub:** [Chathuni16](https://github.com/Chathuni16)
 
 ---
 

@@ -15,17 +15,36 @@ const AddPassword = () => {
     const inputHandler = (e) => {
         const { name, value } = e.target;
         setPassword({ ...password, [name]: value });
-    }
+    };
 
     const submitForm = async (e) => {
         e.preventDefault();
-        await axios.post("/api/passwords/create", password)
-            .then(() => {
-                toast.success("Password added successfully!", { position: "top-right" });
-                navigate("/");
-            })
-            .catch(error => console.log(error));
-    }
+        try {
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+                navigate("/login");
+                return;
+            }
+
+            await axios.post("http://localhost:8000/api/passwords/create", password, {
+                headers: {
+                    Authorization: token
+                }
+            });
+
+            toast.success("Password added successfully!", { position: "top-right" });
+            navigate("/view");
+
+        } catch (error) {
+            console.log(error);
+            toast.error("Failed to save password");
+
+            if (error.response && error.response.status === 401) {
+                navigate("/login");
+            }
+        }
+    };
 
     return (
         <div className='addPassword'>
@@ -39,7 +58,7 @@ const AddPassword = () => {
                 <button type="submit">SAVE PASSWORD</button>
             </form>
         </div>
-    )
-}
+    );
+};
 
 export default AddPassword;

@@ -1,11 +1,13 @@
 import express from "express";
-import{createPassword,getAllPasswords,updatePassword,deletePassword} from "../controller/passwordController.js";
+import { createPassword, getOne, getAllPasswords, updatePassword, deletePassword } from "../controller/passwordController.js";
+import authMiddleware from "../middleware/authMiddleware.js";
 
-const route=express.Router();
+const route = express.Router();
 
-route.get("/getall",getAllPasswords);
-route.post("/create",createPassword);
-route.put("/update/:id",updatePassword);
-route.delete("/delete/:id",deletePassword);
+route.post("/create", authMiddleware, createPassword);
+route.get("/getall", authMiddleware, getAllPasswords);
+route.get("/getone/:id", authMiddleware, getOne);
+route.put("/update/:id", authMiddleware, updatePassword);
+route.delete("/delete/:id", authMiddleware, deletePassword);
 
 export default route;
